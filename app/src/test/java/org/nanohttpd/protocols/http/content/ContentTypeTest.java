@@ -14,4 +14,5 @@ public class ContentTypeTest {
         assertEquals(ct.getContentTypeHeader(), "Fruit");
         assertEquals(ct.getBoundary(), null);
     }
+    
 }
