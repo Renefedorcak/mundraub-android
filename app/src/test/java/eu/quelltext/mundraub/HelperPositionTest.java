@@ -2,6 +2,8 @@ package eu.quelltext.mundraub;
 
 import org.junit.Test;
 
+import java.io.File;
+
 import eu.quelltext.mundraub.common.Helper;
 
 import static org.junit.Assert.assertEquals;
@@ -71,5 +73,36 @@ public class HelperPositionTest {
         int direction = Helper.directionFromPositionToPositionAsResourceId(i, i1, i2, i3);
         assertEquals(mapToString(expectedDirection) + " == " + mapToString(direction), expectedDirection, direction);
     }
+  @Test
+    public void testCompare(){
+        assertEquals(Helper.compare(0,1), -1);
+        assertEquals(Helper.compare(1,0), 1);
+        assertEquals(Helper.compare(0,0), 0);
+    }
 
+    @Test
+    public void testDistanceInMeters(){
+        assertEquals(Helper.distanceInMetersBetween(0.0,0.0,1.0,1.0), 157955.13999241014, 0);
+        assertEquals(Helper.distanceInMetersBetween(45.58885,12.34521,12.47785,1.12345), 3874247.1015959415, 0);
+    }
+
+    @Test
+    public void testMetersToDegrees(){
+        assertEquals(Helper.metersToDegrees(123.25),0.0011034613797355577, 0);
+    }
+
+    @Test
+    public void testDoubleToString(){
+        assertEquals(Helper.doubleTo15DigitString(25.25), "25.250000000000000");
+        assertEquals(Helper.doubleTo15DigitString(-154782.24445), "-154782.244450000000000");
+    }
+
+    @Test
+    public void testFolderSize(){
+        File file = new File("/tmp/foo");
+        assertEquals(Helper.folderSize(file), 0);
+
+        file = new File("C://Program Files");
+        assertEquals(Helper.folderSize(file), 4344878113l);
+    }
 }
